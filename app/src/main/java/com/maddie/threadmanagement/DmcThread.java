@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Thread {
+public class DmcThread {
 
     private boolean inStock;
     private boolean need;
@@ -24,7 +24,7 @@ public class Thread {
     public static final String OUT_OF_STOCK = "Out";
     public static final String LOW_STOCK = "Low";
 
-    public Thread(String dmc, String name, String hexColor) {
+    public DmcThread(String dmc, String name, String hexColor) {
         this.dmc = dmc;
         this.name = name;
         this.hexColor = hexColor;
@@ -190,10 +190,10 @@ public class Thread {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Thread thread = (Thread) o;
-        return dmc.equals(thread.dmc) &&
-                name.equals(thread.name) &&
-                hexColor.equals(thread.hexColor);
+        DmcThread dmcThread = (DmcThread) o;
+        return dmc.equals(dmcThread.dmc) &&
+                name.equals(dmcThread.name) &&
+                hexColor.equals(dmcThread.hexColor);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

@@ -14,7 +14,7 @@ public class Project {
     private String title;
     //private String resourceLink;
     //private String notes;
-    private Set<Thread> threadList;
+    private Set<DmcThread> dmcThreadList;
     public static final String NOT_STARTED = "Not Started";
     public static final String IN_PROGESS = "In Progress";
     public static final String FINISHED = "Finished";
@@ -22,7 +22,7 @@ public class Project {
     public Project(String title) {
         this.status = NOT_STARTED;
         this.title = title;
-        this.threadList = new HashSet<>();
+        this.dmcThreadList = new HashSet<>();
     }
 
     public void toggleStarted() {
@@ -41,19 +41,19 @@ public class Project {
         }
     }
 
-    public boolean addThread(Thread thread) {
-        if (threadList.contains(thread)) {
+    public boolean addThread(DmcThread dmcThread) {
+        if (dmcThreadList.contains(dmcThread)) {
             return false;
         }
-        threadList.add(thread);
-        thread.addProject(this);
+        dmcThreadList.add(dmcThread);
+        dmcThread.addProject(this);
         return true;
     }
 
-    public boolean removeThread(Thread thread) {
-        if (threadList.contains(thread)) {
-            threadList.remove(thread);
-            thread.removeProject(this);
+    public boolean removeThread(DmcThread dmcThread) {
+        if (dmcThreadList.contains(dmcThread)) {
+            dmcThreadList.remove(dmcThread);
+            dmcThread.removeProject(this);
             return true;
         }
         return false;
@@ -76,12 +76,12 @@ public class Project {
         this.title = title;
     }
 
-    public Set<Thread> getThreadList() {
-        return threadList;
+    public Set<DmcThread> getDmcThreadList() {
+        return dmcThreadList;
     }
 
-    public void setThreadList(Set<Thread> threadList) {
-        this.threadList = threadList;
+    public void setDmcThreadList(Set<DmcThread> dmcThreadList) {
+        this.dmcThreadList = dmcThreadList;
     }
 
     //to string
