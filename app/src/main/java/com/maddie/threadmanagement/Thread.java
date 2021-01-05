@@ -20,9 +20,9 @@ public class Thread {
     //private String storageId;
     private int skeinQty;
     private Set<Project> projects;
-    private static final String IN_STOCK = "In Stock";
-    private static final String OUT_OF_STOCK = "Out";
-    private static final String LOW_STOCK = "Low";
+    public static final String IN_STOCK = "In Stock";
+    public static final String OUT_OF_STOCK = "Out";
+    public static final String LOW_STOCK = "Low";
 
     public Thread(String dmc, String name, String hexColor) {
         this.dmc = dmc;
@@ -72,12 +72,14 @@ public class Thread {
             return false;
         }
         projects.add(project);
+        checkAndUpdateNeed();
         return true;
     }
 
     public boolean removeProject(Project project) {
         if (projects.contains(project)) {
             projects.remove(project);
+            removeNeed();
             return true;
         }
         return false;
@@ -105,6 +107,19 @@ public class Thread {
         } else if (inStock && lowStock && !need) {
             toggleNeed();
         }
+    }
+
+    public void removeNeed() {
+        if (need && (!inStock || lowStock) && allProjectsFinished()) {
+            toggleNeed();
+        }
+    }
+
+    public boolean allProjectsFinished() {
+        for (Project p : projects) {
+            if (!p.getStatus().equals(Project.FINISHED)) { return false; }
+        }
+        return true;
     }
 
     //getters & setters

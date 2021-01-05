@@ -15,9 +15,9 @@ public class Project {
     //private String resourceLink;
     //private String notes;
     private Set<Thread> threadList;
-    private static final String NOT_STARTED = "Not Started";
-    private static final String IN_PROGESS = "In Progress";
-    private static final String FINISHED = "Finished";
+    public static final String NOT_STARTED = "Not Started";
+    public static final String IN_PROGESS = "In Progress";
+    public static final String FINISHED = "Finished";
 
     public Project(String title) {
         this.status = NOT_STARTED;
@@ -46,12 +46,14 @@ public class Project {
             return false;
         }
         threadList.add(thread);
+        thread.addProject(this);
         return true;
     }
 
     public boolean removeThread(Thread thread) {
         if (threadList.contains(thread)) {
             threadList.remove(thread);
+            thread.removeProject(this);
             return true;
         }
         return false;
