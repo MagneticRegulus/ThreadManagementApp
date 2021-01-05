@@ -20,6 +20,9 @@ public class Thread {
     //private String storageId;
     private int skeinQty;
     private Set<Project> projects;
+    private static final String IN_STOCK = "In Stock";
+    private static final String OUT_OF_STOCK = "Out";
+    private static final String LOW_STOCK = "Low";
 
     public Thread(String dmc, String name, String hexColor) {
         this.dmc = dmc;
@@ -80,6 +83,30 @@ public class Thread {
         return false;
     }
 
+    public String getStockMsg() {
+        if (!inStock) {
+            return OUT_OF_STOCK;
+        } else if (lowStock) {
+            return LOW_STOCK;
+        } else if (inStock) {
+            return IN_STOCK;
+        } else {
+            return "Unknown";
+        }
+    }
+
+    public void toggleNeed() {
+        need = !need;
+    }
+
+    public void checkAndUpdateNeed() {
+        if (!inStock && !need) {
+            toggleNeed();
+        } else if (inStock && lowStock && !need) {
+            toggleNeed();
+        }
+    }
+
     //getters & setters
     public boolean isInStock() {
         return inStock;
@@ -89,7 +116,7 @@ public class Thread {
         this.inStock = inStock;
     }
 
-    public boolean isNeed() {
+    public boolean need() {
         return need;
     }
 
