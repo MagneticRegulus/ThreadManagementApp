@@ -29,13 +29,14 @@ public class ThreadMainFragment extends Fragment {
         this.theActivity = (MainActivity)getActivity();
         this.controller = theActivity.getController();
 
+        /**
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(ThreadMainFragment.this)
                         .navigate(R.id.action_ThreadMainFragment_to_ThreadEditFragment);
             }
-        });
+        }); **/
 
         controller.testRandomFindThreads();
         controller.setThreadListView(controller.getStore().getInStockList());
