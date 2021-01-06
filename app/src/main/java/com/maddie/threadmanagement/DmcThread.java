@@ -79,7 +79,7 @@ public class DmcThread {
     public boolean removeProject(Project project) {
         if (projects.contains(project)) {
             projects.remove(project);
-            removeNeed();
+            removeAsNotNeeded();
             return true;
         }
         return false;
@@ -109,7 +109,7 @@ public class DmcThread {
         }
     }
 
-    public void removeNeed() {
+    public void removeAsNotNeeded() {
         if (need && (!inStock || lowStock) && allProjectsFinished()) {
             toggleNeed();
         }
@@ -129,6 +129,9 @@ public class DmcThread {
 
     public void setInStock(boolean inStock) {
         this.inStock = inStock;
+        if (!inStock) {
+            setLowStock(false);
+        }
     }
 
     public boolean need() {
@@ -179,9 +182,7 @@ public class DmcThread {
 
     @Override
     public String toString() {
-        return "DMC: " + dmc +
-                " - " + name +
-                " QTY: " + skeinQty;
+        return dmc + " - " + name;
     }
 
     //equals and hashcode

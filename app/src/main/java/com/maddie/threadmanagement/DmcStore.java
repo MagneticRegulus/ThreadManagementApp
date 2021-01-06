@@ -43,6 +43,17 @@ public class DmcStore {
 
     }
 
+    public DmcThread findThread(String dmcId) {
+        for (DmcThread dmc : fullThreadList) {
+            if (dmc.getDmc().equals(dmcId)) {
+                Log.d("FIND", "Found thread with id: " + dmcId);
+                return dmc;
+            }
+        }
+        Log.d("FIND", "Could not find thread with id: " + dmcId);
+        return null;
+    }
+
     //getters & setters
     public Set<DmcThread> getFullThreadList() {
         return fullThreadList;
@@ -51,4 +62,44 @@ public class DmcStore {
     public void setFullThreadList(Set<DmcThread> fullThreadList) {
         this.fullThreadList = fullThreadList;
     }
+
+    public Set<DmcThread> getShoppingList() {
+        //Should buy
+        Set<DmcThread> shoppingList = new HashSet<>();
+        for (DmcThread dmc : fullThreadList) {
+            if (!dmc.isInStock() && dmc.need()) {
+                shoppingList.add(dmc);
+            }
+        }
+        return shoppingList;
+    }
+
+    public Set<DmcThread> getLowStockList() {
+        //Might want to buy
+        Set<DmcThread> lowStockList = new HashSet<>();
+        for (DmcThread dmc : fullThreadList) {
+            if (dmc.isLowStock()) {
+                lowStockList.add(dmc);
+            }
+        }
+        return lowStockList;
+    }
+
+    public Set<DmcThread> getInStockList() {
+        //Others in Stock
+        Set<DmcThread> inStockList = new HashSet<>();
+        for (DmcThread dmc : fullThreadList) {
+            if (!inThreadList(dmc, getShoppingList()) &&
+                    !inThreadList(dmc, getLowStockList()) &&
+                    dmc.isInStock()) {
+                inStockList.add(dmc);
+            }
+        }
+        return  inStockList;
+    }
+
+    public boolean inThreadList(DmcThread dmc, Set<DmcThread> list) {
+        return list.contains(dmc);
+    }
+
 }
