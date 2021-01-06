@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class ThreadMainFragment extends Fragment {
@@ -28,6 +29,8 @@ public class ThreadMainFragment extends Fragment {
 
         this.theActivity = (MainActivity)getActivity();
         this.controller = theActivity.getController();
+
+
 
         /**
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {

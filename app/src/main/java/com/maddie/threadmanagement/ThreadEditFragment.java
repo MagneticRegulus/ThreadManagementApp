@@ -1,15 +1,33 @@
 package com.maddie.threadmanagement;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class ThreadEditFragment extends Fragment {
+
+    private MainActivity theActivity;
+    private Controller controller;
+    private DmcThreadViewModel viewModel;
+    private DmcThread thread;
+    private TextView dmc;
+    private View color;
+    private TextView hex;
+    private TextView name;
+    private Switch stockSwitch;
+    private Switch lowSwitch;
+    private Switch needSwitch;
+    private TextView qty;
+
 
     @Override
     public View onCreateView(
@@ -22,6 +40,34 @@ public class ThreadEditFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        this.theActivity = (MainActivity)getActivity();
+        this.controller = theActivity.getController();
+
+        this.viewModel = new ViewModelProvider(theActivity).get(DmcThreadViewModel.class);
+        viewModel.getSelectedItem().observe(theActivity, item -> {
+            this.thread = item;
+        });
+
+        this.dmc = theActivity.findViewById(R.id.editThreadDmc);
+        this.color = theActivity.findViewById(R.id.editThreadColorView);
+        this.hex = theActivity.findViewById(R.id.editThreadHex);
+        this.name = theActivity.findViewById(R.id.editThreadName);
+        this.stockSwitch = (Switch)theActivity.findViewById(R.id.stockSwitch);
+        this.lowSwitch = (Switch)theActivity.findViewById(R.id.lowSwitch);
+        this.needSwitch = (Switch)theActivity.findViewById(R.id.needSwitch);
+        this.qty = theActivity.findViewById(R.id.editThreadQtyDisplay);
+
+        dmc.setText(thread.getDmc());
+        color.setBackgroundColor(Color.parseColor(thread.getHexColor()));
+        hex.setText(thread.getHexColor());
+        name.setText(thread.getName());
+        stockSwitch.setChecked(thread.isInStock());
+        lowSwitch.setChecked(thread.isLowStock());
+        needSwitch.setChecked(thread.need());
+        qty.setText(String.format("%d", thread.getSkeinQty()));
+
+
         /**
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override

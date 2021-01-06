@@ -10,7 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.List;
@@ -64,7 +66,13 @@ public class DmcThreadAdapter extends BaseAdapter {
         holder.threadColorView.setBackgroundColor(Color.parseColor(thread.getHexColor()));
         holder.threadNameTextView.setText(thread.toString());
         holder.updateThreadBtn.setOnClickListener(view -> {
-            NavHostFragment.findNavController(FragmentManager.findFragment(view))
+
+            Fragment fragment = FragmentManager.findFragment(view);
+            DmcThreadViewModel viewModel = new ViewModelProvider(fragment.requireActivity()).get(DmcThreadViewModel.class);
+
+            viewModel.selectItem(thread);
+
+            NavHostFragment.findNavController(fragment)
                     .navigate(R.id.action_ThreadMainFragment_to_ThreadEditFragment);
         });
 

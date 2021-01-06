@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,7 +19,6 @@
             android:id="@+id/editThreadDmcInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
             android:padding="16dp">
 
             <TextView
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DMC ID:"
-                android:textSize="36sp"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:text="3766 "
-                android:textSize="36sp"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/editThreadDmcLabel"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +48,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/editColorInfo"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:padding="16dp">
 
             <View
@@ -67,7 +67,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
                 android:text="#000000"
-                android:textSize="36sp"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/editThreadColorView"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -78,7 +78,6 @@
             android:id="@+id/editThreadNameInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
             android:padding="16dp">
 
             <TextView
@@ -99,46 +98,69 @@
             android:id="@+id/editThreadStockLevel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
             android:padding="16dp">
 
             <Switch
                 android:id="@+id/stockSwitch"
-                android:layout_width="wrap_content"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:switchMinWidth="60dp"
                 android:switchPadding="32dp"
                 android:text="In Stock"
                 android:textColor="@android:color/tertiary_text_dark"
-                android:textSize="36sp"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/editThreadLow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <Switch
+                android:id="@+id/lowSwitch"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:switchMinWidth="60dp"
+                android:switchPadding="32dp"
+                android:text="Low Stock"
+                android:textColor="@android:color/tertiary_text_dark"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/editThreadNeed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
             android:padding="16dp">
 
             <Switch
                 android:id="@+id/needSwitch"
-                android:layout_width="222dp"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:switchMinWidth="60dp"
                 android:switchPadding="32dp"
                 android:text="Need"
                 android:textColor="@android:color/tertiary_text_dark"
-                android:textSize="36sp"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -165,7 +187,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textSize="36sp"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/increaseThreadQty"
                 app:layout_constraintStart_toEndOf="@+id/decreaseThreadQty"
