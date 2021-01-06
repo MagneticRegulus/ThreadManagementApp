@@ -44,7 +44,7 @@ public class DmcStore {
 
     public DmcThread findThread(String dmcId) {
         for (DmcThread dmc : fullThreadList) {
-            if (dmc.getDmc().equals(dmcId)) {
+            if (dmc.getDmc().toLowerCase().equals(dmcId)) {
                 Log.d("FIND", "Found thread with id: " + dmcId);
                 return dmc;
             }
@@ -88,9 +88,7 @@ public class DmcStore {
         //Others in Stock
         Set<DmcThread> inStockList = new HashSet<>();
         for (DmcThread dmc : fullThreadList) {
-            if (!inThreadList(dmc, getShoppingList()) &&
-                    !inThreadList(dmc, getLowStockList()) &&
-                    dmc.isInStock()) {
+            if (dmc.isInStock()) {
                 inStockList.add(dmc);
             }
         }

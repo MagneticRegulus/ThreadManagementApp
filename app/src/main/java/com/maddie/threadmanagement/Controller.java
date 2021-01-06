@@ -1,11 +1,19 @@
 package com.maddie.threadmanagement;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,21 +41,48 @@ public class Controller {
         fab.hide();
     }
 
+    public void setSearchView() {
+        // Associate searchable configuration with the SearchView
+        //SearchManager searchManager = (SearchManager)theActivity.getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = theActivity.findViewById(R.id.searchForThread);
+        //final EditText searchEditText = (EditText) searchView;
+
+        //searchView.setSearchableInfo(searchManager.getSearchableInfo(theActivity.getComponentName()));
+
+        searchView.setQueryHint("Search for Thread by DMC ID");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("RAN", "onQueryTextChange");
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("RAN", "onQueryTextSubmit");
+                String threadQuery = searchView.getQuery().toString().trim().toLowerCase();
+                DmcThread thread = store.findThread(threadQuery);
+                if (thread == null) {
+                    displayToast("Unable to find thread of ID " + threadQuery);
+                    return false;
+                }
+                Fragment fragment = FragmentManager.findFragment(searchView);
+                DmcThreadViewModel viewModel = new ViewModelProvider(fragment.requireActivity()).get(DmcThreadViewModel.class);
+
+                viewModel.selectItem(thread);
+
+                NavHostFragment.findNavController(fragment)
+                        .navigate(R.id.action_ThreadMainFragment_to_ThreadEditFragment);
+
+                return false;
+            }
+
+        });
+    }
+
     public void setThreadListView() {
-    /**
-        ListView shoppingView = theActivity.findViewById(R.id.lvThreadShopping);
-        List<DmcThread> shopping = new ArrayList<>();
-        shopping.addAll(store.getShoppingList());
-
-        DmcThreadAdapter shoppingAdapter = new DmcThreadAdapter(theActivity, shopping);
-        shoppingView.setAdapter(shoppingAdapter);
-
-        ListView lowView = theActivity.findViewById(R.id.lvThreadLowStock);
-        List<DmcThread> lowStock = new ArrayList<>();
-        lowStock.addAll(store.getLowStockList());
-
-        DmcThreadAdapter lowAdapter = new DmcThreadAdapter(theActivity, lowStock);
-        lowView.setAdapter(lowAdapter); **/
 
         ListView stockView = theActivity.findViewById(R.id.lvThreadList);
         TextView title = theActivity.findViewById(R.id.threadListTitle);

@@ -32,8 +32,6 @@ public class ThreadMainFragment extends Fragment {
         this.theActivity = (MainActivity)getActivity();
         this.controller = theActivity.getController();
 
-
-
         /**
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,5 +43,6 @@ public class ThreadMainFragment extends Fragment {
 
 
         controller.setThreadListView();
+        controller.setSearchView();
     }
 }
