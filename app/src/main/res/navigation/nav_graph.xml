@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/ThreadMainFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.maddie.threadmanagement.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/ThreadMainFragment"
+        android:name="com.maddie.threadmanagement.ThreadMainFragment"
+        android:label="@string/thread_main_fragment"
+        tools:layout="@layout/fragment_thread_main">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_ThreadMainFragment_to_ThreadEditFragment"
+            app:destination="@id/ThreadEditFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.maddie.threadmanagement.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/ThreadEditFragment"
+        android:name="com.maddie.threadmanagement.ThreadEditFragment"
+        android:label="@string/thread_edit_fragment"
+        tools:layout="@layout/fragment_thread_edit">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_ThreadEditFragment_to_ThreadMainFragment"
+            app:destination="@id/ThreadMainFragment" />
     </fragment>
 </navigation>
