@@ -1,20 +1,23 @@
 package com.maddie.threadmanagement;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
+import android.util.Log;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,12 +29,26 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         this.controller = new Controller(this);
-        try {
-            controller.loadThreadFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadPreferences();
         controller.setHomeView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadPreferences();
+    }
+
+    @Override
+    protected void onStop() {
+        savePreferences();
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        savePreferences();
+        super.onDestroy();
     }
 
     @Override
@@ -62,6 +79,54 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    protected void loadPreferences() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("ThreadPref", 0); // 0 - for private mode
+
+        if (pref.contains("threads")) {
+            controller.getStore().setFullThreadListAsSet(getThreadList("threads"));
+            Log.d("LOAD", "Threads loaded by preferences. Total: " + controller.getStore().countThreads());
+        } else {
+            try {
+                controller.loadThreadFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.d("LOAD", "Threads loaded from file. Total: " + controller.getStore().countThreads());
+        }
+    }
+
+    protected void savePreferences()  {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("ThreadPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+
+        setList(editor,"threads", controller.getStore().getFullThreadListAsList());
+        editor.commit();
+        Log.d("SAVE", "Preferences saved.");
+
+    }
+
+    public <T> void setList(SharedPreferences.Editor editor, String key, List<T> list) {
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        set(editor, key, json);
+    }
+
+    public void set(SharedPreferences.Editor editor, String key, String value) {
+        editor.putString(key, value);
+    }
+
+    public List<DmcThread> getThreadList(String key) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("ThreadPref", 0);
+        List<DmcThread> threads = new ArrayList<>();
+        String serializedObject = pref.getString(key, null);
+        if (serializedObject != null) {
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<DmcThread>>(){}.getType();
+            threads = gson.fromJson(serializedObject, type);
+        }
+        return threads;
     }
 
     //getter

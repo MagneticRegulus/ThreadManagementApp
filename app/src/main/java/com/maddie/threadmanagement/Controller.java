@@ -28,7 +28,7 @@ public class Controller {
 
     public Controller(MainActivity activity) {
         this.theActivity = activity;
-        this.store = new DmcStore(theActivity.getResources().openRawResource(R.raw.threadvalues));
+        this.store = new DmcStore(theActivity.getResources().openRawResource(R.raw.threadvalues2));
     }
 
     public void setHomeView() {
@@ -118,7 +118,7 @@ public class Controller {
 
     public void loadThreadFile() throws IOException {
         store.loadFullThreadList();
-        testRandomFindThreads();
+        //testRandomFindThreads();
         //displayToast("Store loaded with thread count: " + store.countThreads());
     }
 

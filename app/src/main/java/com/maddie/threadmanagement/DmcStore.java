@@ -8,7 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -33,13 +35,15 @@ public class DmcStore {
         while ((currLine = br.readLine()) != null) {
             String[] data = currLine.trim().split(",");
             if (data.length != 3) {
-                Log.d("LOAD", "More than 3 data points: " + currLine);
-                break;
+                Log.d("LOAD", "more than 3 data points: " + currLine);
+            } else if (data.length >= 1 && data[0].equals("DMC ID")) {
+                Log.d("LOAD", "invalid data" + currLine);
+            } else {
+                fullThreadList.add(new DmcThread(data[0], data[1], data[2]));
             }
-            fullThreadList.add(new DmcThread(data[0], data[1], data[2]));
         }
 
-        Log.d("RAN", "Loaded full list");
+        Log.d("LOAD", "Loaded full list: " + countThreads() + " threads loaded");
     }
 
     public DmcThread findThread(String dmcId) {
@@ -57,9 +61,16 @@ public class DmcStore {
     public Set<DmcThread> getFullThreadList() {
         return fullThreadList;
     }
+    public List<DmcThread> getFullThreadListAsList() {
+        List<DmcThread> threads = new ArrayList<>();
+        threads.addAll(fullThreadList);
+        return threads;
+    }
 
-    public void setFullThreadList(Set<DmcThread> fullThreadList) {
-        this.fullThreadList = fullThreadList;
+    public void setFullThreadListAsSet(List<DmcThread> fullThreadList) {
+        Set<DmcThread> threads = new HashSet<>();
+        threads.addAll(fullThreadList);
+        this.fullThreadList = threads;
     }
 
     public Set<DmcThread> getShoppingList() {
