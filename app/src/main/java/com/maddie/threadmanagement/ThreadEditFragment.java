@@ -49,6 +49,23 @@ public class ThreadEditFragment extends Fragment {
             this.thread = item;
         });
 
+        setAllDisplayableFields();
+
+        setSwitches();
+
+        view.findViewById(R.id.saveThreadEditFab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                saveAll();
+
+                NavHostFragment.findNavController(ThreadEditFragment.this)
+                        .navigate(R.id.action_ThreadEditFragment_to_ThreadMainFragment);
+            }
+        });
+    }
+
+    public void setAllDisplayableFields() {
         this.dmc = theActivity.findViewById(R.id.editThreadDmc);
         this.color = theActivity.findViewById(R.id.editThreadColorView);
         this.hex = theActivity.findViewById(R.id.editThreadHex);
@@ -66,13 +83,64 @@ public class ThreadEditFragment extends Fragment {
         lowSwitch.setChecked(thread.isLowStock());
         needSwitch.setChecked(thread.need());
         qty.setText(String.format("%d", thread.getSkeinQty()));
+    }
 
-        view.findViewById(R.id.saveThreadEditFab).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(ThreadEditFragment.this)
-                        .navigate(R.id.action_ThreadEditFragment_to_ThreadMainFragment);
-            }
+    public void saveStockStatus() {
+        if (stockSwitch.isChecked()) {
+            thread.addToStock();
+        } else {
+            thread.removeFromStock();
+        }
+    }
+
+    public void saveLowStatus() {
+        if (lowSwitch.isChecked()) {
+            thread.setLowStock(true);
+        } else {
+            thread.setLowStock(false);
+        }
+    }
+
+    public void saveNeedStatus() {
+        if (needSwitch.isChecked()) {
+            thread.setNeed(true);
+        } else {
+            thread.setNeed(false);
+        }
+    }
+
+    public void saveAll() {
+        saveStockStatus();
+        saveLowStatus();
+        saveNeedStatus();
+    }
+
+    public void setSwitches() {
+
+        stockSwitch.setOnClickListener((View v) -> {
+
+            saveStockStatus();
+
+            lowSwitch.setChecked(thread.isLowStock());
+            needSwitch.setChecked(thread.need());
+            qty.setText(String.format("%d", thread.getSkeinQty()));
         });
+
+        lowSwitch.setOnClickListener((View v) -> {
+
+            saveLowStatus();
+
+            stockSwitch.setChecked(thread.isInStock());
+            needSwitch.setChecked(thread.need());
+            qty.setText(String.format("%d", thread.getSkeinQty()));
+        });
+
+        needSwitch.setOnClickListener((View v) -> {
+            saveNeedStatus();
+            stockSwitch.setChecked(thread.isInStock());
+            lowSwitch.setChecked(thread.isLowStock());
+            qty.setText(String.format("%d", thread.getSkeinQty()));
+        });
+
     }
 }

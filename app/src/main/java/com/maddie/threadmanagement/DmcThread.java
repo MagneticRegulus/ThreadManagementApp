@@ -146,6 +146,9 @@ public class DmcThread {
     }
 
     public void setLowStock(boolean lowStock) {
+        if (lowStock) {
+            addToStock();
+        }
         this.lowStock = lowStock;
     }
 
