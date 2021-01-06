@@ -64,10 +64,12 @@ public class DmcThread {
 
     public void increaseQty() {
         skeinQty++;
+        if (!inStock) { addToStock(); }
     }
 
     public void decreaseQty() {
-        skeinQty--;
+        if (skeinQty > 0) { skeinQty--; }
+        if (inStock && skeinQty <= 0) { removeFromStock(); }
     }
 
     public boolean addProject(Project project) {
@@ -147,7 +149,7 @@ public class DmcThread {
     }
 
     public void setLowStock(boolean lowStock) {
-        if (lowStock) {
+        if (lowStock && !inStock) {
             addToStock();
         }
         this.lowStock = lowStock;

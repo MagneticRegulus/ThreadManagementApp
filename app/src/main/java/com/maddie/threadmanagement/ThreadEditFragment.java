@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ public class ThreadEditFragment extends Fragment {
     private Switch lowSwitch;
     private Switch needSwitch;
     private TextView qty;
+    private ImageButton decreaseQtyBtn;
+    private ImageButton increaseQtyBtn;
 
 
     @Override
@@ -52,8 +55,8 @@ public class ThreadEditFragment extends Fragment {
         });
 
         setAllDisplayableFields();
-
         setSwitches();
+        setQtyButtons();
 
         view.findViewById(R.id.saveThreadEditFab).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +79,8 @@ public class ThreadEditFragment extends Fragment {
         this.lowSwitch = (Switch)theActivity.findViewById(R.id.lowSwitch);
         this.needSwitch = (Switch)theActivity.findViewById(R.id.needSwitch);
         this.qty = theActivity.findViewById(R.id.editThreadQtyDisplay);
+        this.increaseQtyBtn = (ImageButton)theActivity.findViewById(R.id.increaseThreadQty);
+        this.decreaseQtyBtn = (ImageButton)theActivity.findViewById(R.id.decreaseThreadQty);
 
         dmc.setText(thread.getDmc());
         color.setBackgroundColor(Color.parseColor(thread.getHexColor()));
@@ -133,6 +138,25 @@ public class ThreadEditFragment extends Fragment {
             saveNeedStatus();
             stockSwitch.setChecked(thread.isInStock());
             lowSwitch.setChecked(thread.isLowStock());
+            qty.setText(String.format("%d", thread.getSkeinQty()));
+        });
+
+    }
+
+    public void setQtyButtons() {
+        decreaseQtyBtn.setOnClickListener(view -> {
+            thread.decreaseQty();
+            stockSwitch.setChecked(thread.isInStock());
+            lowSwitch.setChecked(thread.isLowStock());
+            needSwitch.setChecked(thread.need());
+            qty.setText(String.format("%d", thread.getSkeinQty()));
+        });
+
+        increaseQtyBtn.setOnClickListener(view -> {
+            thread.increaseQty();
+            stockSwitch.setChecked(thread.isInStock());
+            lowSwitch.setChecked(thread.isLowStock());
+            needSwitch.setChecked(thread.need());
             qty.setText(String.format("%d", thread.getSkeinQty()));
         });
 
