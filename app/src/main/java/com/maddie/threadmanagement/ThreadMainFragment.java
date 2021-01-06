@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.io.IOException;
+
 public class ThreadMainFragment extends Fragment {
 
     private MainActivity theActivity;
@@ -41,7 +43,7 @@ public class ThreadMainFragment extends Fragment {
             }
         }); **/
 
-        controller.testRandomFindThreads();
-        controller.setThreadListView(controller.getStore().getInStockList());
+
+        controller.setThreadListView();
     }
 }

@@ -3,8 +3,10 @@ package com.maddie.threadmanagement;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -57,7 +59,7 @@ public class ThreadEditFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                saveAll();
+                //saveAll();
 
                 NavHostFragment.findNavController(ThreadEditFragment.this)
                         .navigate(R.id.action_ThreadEditFragment_to_ThreadMainFragment);
@@ -109,16 +111,9 @@ public class ThreadEditFragment extends Fragment {
         }
     }
 
-    public void saveAll() {
-        saveStockStatus();
-        saveLowStatus();
-        saveNeedStatus();
-    }
-
     public void setSwitches() {
 
-        stockSwitch.setOnClickListener((View v) -> {
-
+        stockSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             saveStockStatus();
 
             lowSwitch.setChecked(thread.isLowStock());
@@ -126,8 +121,7 @@ public class ThreadEditFragment extends Fragment {
             qty.setText(String.format("%d", thread.getSkeinQty()));
         });
 
-        lowSwitch.setOnClickListener((View v) -> {
-
+        lowSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             saveLowStatus();
 
             stockSwitch.setChecked(thread.isInStock());
@@ -135,7 +129,7 @@ public class ThreadEditFragment extends Fragment {
             qty.setText(String.format("%d", thread.getSkeinQty()));
         });
 
-        needSwitch.setOnClickListener((View v) -> {
+        needSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             saveNeedStatus();
             stockSwitch.setChecked(thread.isInStock());
             lowSwitch.setChecked(thread.isLowStock());

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Thread Management</string>
+    <string name="app_name">Stichstock</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="thread_main_fragment">Thread Main</string>
@@ -7,5 +7,9 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    
+    <string name="shopping_list_title">Shopping List</string>
+    <string name="low_stock_title">Low Stock</string>
+    <string name="in_stock_title">In Stock</string>
+    <string name="information_menu_text">Information</string>
+
 </resources>

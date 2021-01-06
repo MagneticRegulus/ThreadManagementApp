@@ -39,8 +39,7 @@ public class DmcStore {
             fullThreadList.add(new DmcThread(data[0], data[1], data[2]));
         }
 
-        br.close();
-
+        Log.d("RAN", "Loaded full list");
     }
 
     public DmcThread findThread(String dmcId) {
@@ -67,7 +66,7 @@ public class DmcStore {
         //Should buy
         Set<DmcThread> shoppingList = new HashSet<>();
         for (DmcThread dmc : fullThreadList) {
-            if (!dmc.isInStock() && dmc.need()) {
+            if (dmc.need()) {
                 shoppingList.add(dmc);
             }
         }

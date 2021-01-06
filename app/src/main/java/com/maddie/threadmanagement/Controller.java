@@ -1,27 +1,22 @@
 package com.maddie.threadmanagement;
 
-import android.content.res.Resources;
 import android.util.Log;
-import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Controller {
 
     private MainActivity theActivity;
     private DmcStore store;
-    private DmcThreadAdapter dmcThreadAdapter;
 
     public Controller(MainActivity activity) {
         this.theActivity = activity;
@@ -38,14 +33,52 @@ public class Controller {
         fab.hide();
     }
 
-    public void setThreadListView(Set<DmcThread> threadList) {
-        ListView threadView = theActivity.findViewById(R.id.lvThreadStock);
-        List<DmcThread> threads = new ArrayList<>();
-        threads.addAll(threadList);
+    public void setThreadListView() {
+    /**
+        ListView shoppingView = theActivity.findViewById(R.id.lvThreadShopping);
+        List<DmcThread> shopping = new ArrayList<>();
+        shopping.addAll(store.getShoppingList());
 
-        dmcThreadAdapter = new DmcThreadAdapter(theActivity, threads);
+        DmcThreadAdapter shoppingAdapter = new DmcThreadAdapter(theActivity, shopping);
+        shoppingView.setAdapter(shoppingAdapter);
 
-        threadView.setAdapter(dmcThreadAdapter);
+        ListView lowView = theActivity.findViewById(R.id.lvThreadLowStock);
+        List<DmcThread> lowStock = new ArrayList<>();
+        lowStock.addAll(store.getLowStockList());
+
+        DmcThreadAdapter lowAdapter = new DmcThreadAdapter(theActivity, lowStock);
+        lowView.setAdapter(lowAdapter); **/
+
+        ListView stockView = theActivity.findViewById(R.id.lvThreadList);
+        TextView title = theActivity.findViewById(R.id.threadListTitle);
+        title.setText(R.string.in_stock_title);
+        List<DmcThread> inStock = new ArrayList<>();
+        inStock.addAll(store.getInStockList());
+
+        DmcThreadAdapter stockAdapter = new DmcThreadAdapter(theActivity, inStock);
+        stockView.setAdapter(stockAdapter);
+    }
+
+    public void setLowListView() {
+        ListView lowView = theActivity.findViewById(R.id.lvThreadList);
+        TextView title = theActivity.findViewById(R.id.threadListTitle);
+        title.setText(R.string.low_stock_title);
+        List<DmcThread> lowStock = new ArrayList<>();
+        lowStock.addAll(store.getLowStockList());
+
+        DmcThreadAdapter lowAdapter = new DmcThreadAdapter(theActivity, lowStock);
+        lowView.setAdapter(lowAdapter);
+    }
+
+    public void setShoppingListView() {
+        ListView shoppingView = theActivity.findViewById(R.id.lvThreadList);
+        TextView title = theActivity.findViewById(R.id.threadListTitle);
+        title.setText(R.string.shopping_list_title);
+        List<DmcThread> shopping = new ArrayList<>();
+        shopping.addAll(store.getShoppingList());
+
+        DmcThreadAdapter shoppingAdapter = new DmcThreadAdapter(theActivity, shopping);
+        shoppingView.setAdapter(shoppingAdapter);
     }
 
     public void loadThreadFile() throws IOException {
@@ -59,12 +92,20 @@ public class Controller {
     }
 
     public void testRandomFindThreads() {
-        String[] dmcIds = new String[] {"932", "747", "472", "3722", "3829"};
+        if (!store.getInStockList().isEmpty()) { return; }
         store.findThread("932").addToStock();
         store.findThread("727").addToStock();
         store.findThread("472").addToStock();
         store.findThread("3722").addToStock();
-        store.findThread("3829").addToStock();
+        store.findThread("1").addToStock();
+        store.findThread("2").addToStock();
+        store.findThread("3").addToStock();
+        store.findThread("4").addToStock();
+        store.findThread("5").addToStock();
+        store.findThread("6").addToStock();
+        store.findThread("7").addToStock();
+        store.findThread("8").addToStock();
+        Log.d("RAN", "Testing things ran");
     }
 
     //getters & setters
