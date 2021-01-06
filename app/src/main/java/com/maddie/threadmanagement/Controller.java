@@ -28,7 +28,7 @@ public class Controller {
         this.store = new DmcStore(theActivity.getResources().openRawResource(R.raw.threadvalues));
     }
 
-    public void setHomeView() throws IOException {
+    public void setHomeView() {
         theActivity.setContentView(R.layout.activity_main);
         Toolbar toolbar = theActivity.findViewById(R.id.toolbar);
         theActivity.setSupportActionBar(toolbar);
@@ -36,8 +36,6 @@ public class Controller {
         FloatingActionButton fab = theActivity.findViewById(R.id.fab);
         fab.setOnClickListener(view -> displayToast("You clicked the Add Button!"));
         fab.hide();
-
-        loadThreadFile();
     }
 
     public void setThreadListView(Set<DmcThread> threadList) {
@@ -52,6 +50,7 @@ public class Controller {
 
     public void loadThreadFile() throws IOException {
         store.loadFullThreadList();
+        testRandomFindThreads();
         //displayToast("Store loaded with thread count: " + store.countThreads());
     }
 
@@ -61,12 +60,11 @@ public class Controller {
 
     public void testRandomFindThreads() {
         String[] dmcIds = new String[] {"932", "747", "472", "3722", "3829"};
-        store.findThread("932").setInStock(true);
-        store.findThread("727").setInStock(true);
-        store.findThread("472").setInStock(true);
-        store.findThread("3722").setInStock(true);
-        store.findThread("3829").setInStock(true);
-        displayToast("In stock: " + store.getInStockList().size());
+        store.findThread("932").addToStock();
+        store.findThread("727").addToStock();
+        store.findThread("472").addToStock();
+        store.findThread("3722").addToStock();
+        store.findThread("3829").addToStock();
     }
 
     //getters & setters

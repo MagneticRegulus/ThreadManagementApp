@@ -37,11 +37,13 @@ public class DmcThread {
 
     public void addToStock() {
         setInStock(true);
-        increaseQty(); //should set to 1
+        setNeed(false);
+        skeinQty = 1;
     }
 
     public void removeFromStock() {
         setInStock(false);
+        setLowStock(false);
         skeinQty = 0;
     }
 
@@ -129,9 +131,6 @@ public class DmcThread {
 
     public void setInStock(boolean inStock) {
         this.inStock = inStock;
-        if (!inStock) {
-            setLowStock(false);
-        }
     }
 
     public boolean need() {

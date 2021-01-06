@@ -67,14 +67,12 @@ public class ThreadEditFragment extends Fragment {
         needSwitch.setChecked(thread.need());
         qty.setText(String.format("%d", thread.getSkeinQty()));
 
-
-        /**
-        view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.saveThreadEditFab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(ThreadEditFragment.this)
                         .navigate(R.id.action_ThreadEditFragment_to_ThreadMainFragment);
             }
-        }); **/
+        });
     }
 }

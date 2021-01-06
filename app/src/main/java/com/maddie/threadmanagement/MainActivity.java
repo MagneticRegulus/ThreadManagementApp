@@ -27,10 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
         this.controller = new Controller(this);
         try {
-            controller.setHomeView();
+            controller.loadThreadFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        controller.setHomeView();
     }
 
     @Override
