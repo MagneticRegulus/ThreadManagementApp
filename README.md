@@ -57,7 +57,7 @@ Click on Low Stock to view the Low Stock list. Should be empty by default.
 
 In any of these views, you can click on the pencil icon next to a thread color to view the individual color.
 
-<img src="images/individual_thread.png" height="400">
+<img src="images/individual_thread_view.png" height="400">
 
 In this view you can toggle:
 - if the color is in stock
