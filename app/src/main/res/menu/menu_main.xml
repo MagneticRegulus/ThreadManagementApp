@@ -4,28 +4,29 @@
     tools:context="com.maddie.threadmanagement.MainActivity">
     <item
         android:id="@+id/in_stock_list"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/baseline_inventory_2_24"
         android:title="@string/in_stock_title"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/shopping_list"
-        android:icon="@drawable/baseline_bookmark_border_24"
+        android:icon="@drawable/baseline_shopping_bag_24"
         android:title="@string/shopping_list_title"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/low_stock_list"
-        android:icon="@drawable/baseline_bookmark_24"
+        android:icon="@drawable/baseline_warning_24"
         android:title="@string/low_stock_title"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/info_screen"
-        android:icon="@android:drawable/ic_dialog_info"
+        android:icon="@drawable/baseline_info_24"
         android:title="@string/information_menu_text"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/baseline_settings_24"
         android:orderInCategory="100"
         android:title="@string/action_settings"
-        app:showAsAction="ifRoom" />
+        android:visible="false"
+        app:showAsAction="never" />
 </menu>
