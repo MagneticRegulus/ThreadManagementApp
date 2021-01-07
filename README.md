@@ -41,7 +41,7 @@ In the `Controller` class, there is a method called `testRandomFindThreads()` th
 
 To view the In Stock List, click on the inventory button (first icon). (This is also the home screen of the app.)
 
-![](images/stock_list.png)
+<img src="images/stock_list.png" height="200">
 
 To view the Shopping List, click on the shopping bag button (second icon). Should be empty by default.
 
