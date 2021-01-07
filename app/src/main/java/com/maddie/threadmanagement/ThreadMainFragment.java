@@ -42,6 +42,8 @@ public class ThreadMainFragment extends Fragment {
         }); **/
 
 
+        controller.setStockView(theActivity.findViewById(R.id.lvThreadList));
+        controller.setListTitle(theActivity.findViewById(R.id.threadListTitle));
         controller.setThreadListView();
         controller.setSearchView();
     }

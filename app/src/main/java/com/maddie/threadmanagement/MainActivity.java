@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-             switch (item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.in_stock_list:
                 controller.setThreadListView();
                 return true;
@@ -74,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
                 controller.setShoppingListView();
                 return true;
             case R.id.action_settings:
+                controller.displayToast("No settings");
+                //startSettings(); No settings yet
+                return true;
+            case R.id.info_screen:
+                controller.displayToast("Use the search bar to find DMC Thread colors by id");
                 //startSettings(); No settings yet
                 return true;
             default:

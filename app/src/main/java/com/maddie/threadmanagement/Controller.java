@@ -3,6 +3,7 @@ package com.maddie.threadmanagement;
 import android.app.SearchManager;
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -25,6 +26,8 @@ public class Controller {
 
     private MainActivity theActivity;
     private DmcStore store;
+    private ListView stockView;
+    private TextView listTitle;
 
     public Controller(MainActivity activity) {
         this.theActivity = activity;
@@ -36,9 +39,9 @@ public class Controller {
         Toolbar toolbar = theActivity.findViewById(R.id.toolbar);
         theActivity.setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = theActivity.findViewById(R.id.fab);
-        fab.setOnClickListener(view -> displayToast("You clicked the Add Button!"));
-        fab.hide();
+        this.stockView = theActivity.findViewById(R.id.lvThreadList);
+        this.listTitle = theActivity.findViewById(R.id.threadListTitle);
+
     }
 
     public void setSearchView() {
@@ -55,7 +58,7 @@ public class Controller {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Log.d("RAN", "onQueryTextChange");
+                //Log.d("RAN", "onQueryTextChange");
                 return false;
             }
 
@@ -83,10 +86,9 @@ public class Controller {
     }
 
     public void setThreadListView() {
-
-        ListView stockView = theActivity.findViewById(R.id.lvThreadList);
-        TextView title = theActivity.findViewById(R.id.threadListTitle);
-        title.setText(R.string.in_stock_title);
+        //stockView = theActivity.findViewById(R.id.lvThreadList);
+        //listTitle = theActivity.findViewById(R.id.threadListTitle);
+        listTitle.setText(R.string.in_stock_title);
         List<DmcThread> inStock = new ArrayList<>();
         inStock.addAll(store.getInStockList());
 
@@ -95,25 +97,25 @@ public class Controller {
     }
 
     public void setLowListView() {
-        ListView lowView = theActivity.findViewById(R.id.lvThreadList);
-        TextView title = theActivity.findViewById(R.id.threadListTitle);
-        title.setText(R.string.low_stock_title);
+        //ListView lowView = theActivity.findViewById(R.id.lvThreadList);
+        //TextView title = theActivity.findViewById(R.id.threadListTitle);
+        listTitle.setText(R.string.low_stock_title);
         List<DmcThread> lowStock = new ArrayList<>();
         lowStock.addAll(store.getLowStockList());
 
         DmcThreadAdapter lowAdapter = new DmcThreadAdapter(theActivity, lowStock);
-        lowView.setAdapter(lowAdapter);
+        stockView.setAdapter(lowAdapter);
     }
 
     public void setShoppingListView() {
-        ListView shoppingView = theActivity.findViewById(R.id.lvThreadList);
-        TextView title = theActivity.findViewById(R.id.threadListTitle);
-        title.setText(R.string.shopping_list_title);
+        //ListView shoppingView = theActivity.findViewById(R.id.lvThreadList);
+        //TextView title = theActivity.findViewById(R.id.threadListTitle);
+        listTitle.setText(R.string.shopping_list_title);
         List<DmcThread> shopping = new ArrayList<>();
         shopping.addAll(store.getShoppingList());
 
         DmcThreadAdapter shoppingAdapter = new DmcThreadAdapter(theActivity, shopping);
-        shoppingView.setAdapter(shoppingAdapter);
+        stockView.setAdapter(shoppingAdapter);
     }
 
     public void loadThreadFile() throws IOException {
@@ -151,5 +153,21 @@ public class Controller {
 
     public void setStore(DmcStore store) {
         this.store = store;
+    }
+
+    public ListView getStockView() {
+        return stockView;
+    }
+
+    public void setStockView(ListView stockView) {
+        this.stockView = stockView;
+    }
+
+    public TextView getListTitle() {
+        return listTitle;
+    }
+
+    public void setListTitle(TextView listTitle) {
+        this.listTitle = listTitle;
     }
 }
