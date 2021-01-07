@@ -28,12 +28,20 @@ For full product:
 - Proper layouts for all 
 
 ## 3. Tech Stack and Build of Application
-Front end and back end Android development using Java, xml, gradle. Built in Android Studio. Learned about Fragments in Android development for this project.
+Front end and back end Android development using Java, xml, gradle, JSON. Built in Android Studio. 
+
+Learned:
+ - about Fragments in Android development
+ - how to create a simple toolbar menu
+ - how to use JSON to store lists of custom object to shared preferences
+ - how to import data using a BufferedReader
 
 ## 4. Running the Application
 Install the apk file onto and android phone (make sure to enable installing from an unknown source).
 OR Load the project files into Android studio and run on a smart phone emulator.
 I have included a video file of the application running.
+
+In Android Studio, I have used the Pixel / Pixel 2 size for my testing (I actually have a Pixel 2), but should work on the Pixel 4XL emulator too. The layout cannot be rotated at this time (I have hardcoded this - there was an issue with one of the fragments that I could not solve in time).
 
 ## 5. Test Cases
 
