@@ -1,6 +1,7 @@
 package com.maddie.threadmanagement;
 
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,10 +28,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         this.controller = new Controller(this);
         loadPreferences();
         controller.setHomeView();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override

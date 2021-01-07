@@ -120,7 +120,7 @@ public class Controller {
 
     public void loadThreadFile() throws IOException {
         store.loadFullThreadList();
-        //testRandomFindThreads();
+        testRandomFindThreads();
         //displayToast("Store loaded with thread count: " + store.countThreads());
     }
 
