@@ -78,7 +78,7 @@ Press the floating save button in the top right to save the thread state and ret
 
 To search for a thread, you must know the id number. Click on the search bar.
 
-<img src="images/click_on_search.png" height="400">
+<img src="images/click_on_search_bar.png" height="400">
 
 Below is an example of what to expect when a color is not in the list.
 
