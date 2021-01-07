@@ -45,19 +45,19 @@ To view the In Stock List, click on the inventory button (first icon). (This is 
 
 To view the Shopping List, click on the shopping bag button (second icon). Should be empty by default.
 
-![](images/shopping_list.png)
+<img src="images/shopping_list.png" height="400">
 
 Open the menu but pressing the vertical ellipses.
 
-![](images/open_menu.png)
+<img src="images/open_menu.png" height="400">
 
 Click on Low Stock to view the Low Stock list. Should be empty by default.
 
-![](images/low_stock_list.png)
+<img src="images/low_stock_list" height="400">
 
 In any of these views, you can click on the pencil icon next to a thread color to view the individual color.
 
-![](images/individual_thread_view.png)
+<img src="images/individual_thread" height="400">
 
 In this view you can toggle:
 - if the color is in stock
@@ -78,11 +78,11 @@ Press the floating save button in the top right to save the thread state and ret
 
 To search for a thread, you must know the id number. Click on the search bar.
 
-![](images/click_on_search_bar.png)
+<img src="images/click_on_search.png" height="400">
 
 Below is an example of what to expect when a color is not in the list.
 
-![](images/example_not_found.png)
+<img src="images/example_not_found.png" height="400">
 
 Most colors are numbers ranging (but not inclusive - remember there are only 507! I didn't come up with this system!) from 1 to 3895. The full list is in the CSV file: [threadvalues2.csv](app/src/main/res/raw/threadvalues2.csv)
 
